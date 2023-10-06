@@ -11,14 +11,9 @@ function DataComponent() {
   const [regionData, setRegionData] = useState([]);
   const [searchedData, setSearchedData] = useState([...regionData]);
   const [results, setResults] = useState([]);
-  const [allRegions, setAllRegions] = useState([
-    "all",
-    "africa",
-    "america",
-    "asia",
-    "europe",
-    "oceania",
-  ]);
+  const [input, setInput] = useState("");
+
+  const allRegions = ["all", "africa", "america", "asia", "europe", "oceania",];
   
 
   useEffect(() => {
@@ -37,6 +32,7 @@ function DataComponent() {
 
   function filterRegion(e) {
     setRegion(e.target.value);
+    setInput("")
   }
 
   const btns = allRegions.map((region) => (
@@ -87,10 +83,12 @@ function DataComponent() {
             region={region}
             setResults={setResults}
             regionData={regionData}
+            setInput={setInput}
+            input={input}
           />
           {showResults && <SearchResults results={results} />}
         </div>
-        <select onChange={filterRegion} value={region} name="regions" id="">
+        <select onChange={filterRegion} value={region} name="regions">
           {btns}
         </select>
       </nav>

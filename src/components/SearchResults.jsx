@@ -4,7 +4,6 @@ function SearchResults({ results }) {
   const filteredResults = results.map((result, index) => (
     <p
       key={index}
-      to={`/country/${result.altSpellings}`}
       className="search_result"
       onClick={() => alert(`You selected: ${result.name.common}`)}
     >

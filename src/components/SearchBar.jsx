@@ -1,28 +1,39 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 SearchBar.propTypes = {
     regionData: PropTypes.array.isRequired,
     setResults: PropTypes.func,
     setSearchedData: PropTypes.func,
-    region: PropTypes.string
+    region: PropTypes.string,
+    setInput: PropTypes.func,
+    input: PropTypes.string
   };
 
-function SearchBar({ setSearchedData, regionData, setResults, region }) {
-  const [input, setInput] = useState("");
+function SearchBar({ setInput, input, setSearchedData, regionData, setResults, region }) {
   
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   const showResults = (value) => {
     const results = regionData.filter((result) => {
       return result.name.common.toLowerCase().includes(value.toLowerCase());
     });
-    setResults(results);
+    setResults(results)
     setSearchedData(results)
   };
 
   const handleChange = (value) => {
     setInput(value);
-    showResults(value);
+    // Clear the previous timeout if it exists
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    // Set a new timeout to fetch data after a delay (e.g., 500 milliseconds)
+    const newTimeout = setTimeout(() => {
+      showResults(value);
+    }, 500);
+
+    setSearchTimeout(newTimeout);
   };
 
   function capitalize(str){
