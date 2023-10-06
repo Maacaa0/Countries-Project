@@ -21,12 +21,17 @@ body {
   font-family: 'Nunito Sans', sans-serif;
 }
 
+h1 {
+  font-size: 1rem;
+}
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 3px 7px #00000063;
   padding: .5rem var(--pagePadding);
+  width: 100%;
 }
 
 .darkmode {
@@ -38,10 +43,11 @@ header {
   border: none;
   font-weight: 600;
   cursor: pointer;
+  color: black;
 }
 
 svg {
-  width: 2rem;
+  width: 1.5rem;
 }
 
 nav {
@@ -51,7 +57,7 @@ nav {
 }
 
 input {
-  width: 20rem;
+  width: auto;
   padding: 1rem 1.5rem;
   padding-left: 2.5rem;
   background-image: url(/images/search_icon.svg);
@@ -75,7 +81,8 @@ input:focus-visible {
 
 select {
   font-family: inherit;
-  font-size: 2rem;
+  color: black;
+  font-size: 1rem;
   text-transform: capitalize;
   padding: 0 .5rem;
 }
