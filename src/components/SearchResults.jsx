@@ -6,12 +6,11 @@ function SearchResults({ results }) {
       key={index}
       to={`/country/${result.altSpellings}`}
       className="search_result"
-      onClick={() => console.log(result.altSpellings[0])}
+      onClick={() => alert(`You selected: ${result.name.common}`)}
     >
       {result.name.common}
     </p>
   ));
-console.log(results)
   return <div className="results_container">{filteredResults}</div>;
 }
 
