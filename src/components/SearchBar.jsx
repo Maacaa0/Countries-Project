@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 
 SearchBar.propTypes = {
     regionData: PropTypes.array.isRequired,
-    setResults: PropTypes.func // Assuming regionData is an array
+    setResults: PropTypes.func,
+    setSearchedData: PropTypes.func,
+    region: PropTypes.string
   };
 
-function SearchBar({ regionData, setResults }) {
+function SearchBar({ setSearchedData, regionData, setResults, region }) {
   const [input, setInput] = useState("");
   
 
@@ -14,7 +16,8 @@ function SearchBar({ regionData, setResults }) {
     const results = regionData.filter((result) => {
       return result.name.common.toLowerCase().includes(value.toLowerCase());
     });
-    return setResults(results);
+    setResults(results);
+    setSearchedData(results)
   };
 
   const handleChange = (value) => {
@@ -22,8 +25,13 @@ function SearchBar({ regionData, setResults }) {
     showResults(value);
   };
 
+  function capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
   return (
     <>
+      {region !== "all" && <small className="searching">searching in {capitalize(region)}</small>}
       <input
         placeholder={"Search for a country..."}
         type="text"

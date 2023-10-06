@@ -9,6 +9,7 @@ import SearchResults from "./SearchResults";
 function DataComponent() {
   const [region, setRegion] = useState("all");
   const [regionData, setRegionData] = useState([]);
+  const [searchedData, setSearchedData] = useState([...regionData]);
   const [results, setResults] = useState([]);
   const [allRegions, setAllRegions] = useState([
     "all",
@@ -18,6 +19,7 @@ function DataComponent() {
     "europe",
     "oceania",
   ]);
+  
 
   useEffect(() => {
     fetch(
@@ -26,7 +28,10 @@ function DataComponent() {
         : `https://restcountries.com/v3.1/region/${region}`
     )
       .then((response) => response.json())
-      .then((data) => setRegionData(data))
+      .then((data) => {
+        setRegionData(data)
+        setSearchedData(data)
+      })
       .catch((error) => console.log(error));
   }, [region]);
 
@@ -40,7 +45,7 @@ function DataComponent() {
     </option>
   ));
 
-  const countries = regionData.map((country, index) => (
+  const countries = searchedData.map((country, index) => (
     <Countries
       key={country.name.common + index}
       name={country.name.common}
@@ -49,46 +54,47 @@ function DataComponent() {
       capital={country.capital}
       flag={country.flags.svg}
     />
-    // console.log(country.name.official)
   ));
 
+  const [showResults, setShowResults] = useState(results.length > 0);
 
-  const [showResults, setShowResults] = useState(results.length > 0)
-
-  const resultsContainer = useRef(null)
-
-  useEffect(()=> {
-    setShowResults(results.length > 0)
-  },[results])
+  const resultsContainer = useRef(null);
 
   useEffect(() => {
-      const handleClickOutside = (e) => {
-        if (resultsContainer.current && e.target !== resultsContainer.current) {
-          setShowResults(false);
-        }
-      };
-  
-      document.addEventListener("click", handleClickOutside);
-  
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }, []);
+    setShowResults(results.length > 0);
+  }, [results]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (resultsContainer.current && e.target !== resultsContainer.current) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
       <nav>
         <div className="search_container" ref={resultsContainer}>
-        <SearchBar setResults={setResults} regionData={regionData}/>
-        {showResults && <SearchResults results={results}/>}
+          <SearchBar
+            setSearchedData={setSearchedData}
+            region={region}
+            setResults={setResults}
+            regionData={regionData}
+          />
+          {showResults && <SearchResults results={results} />}
         </div>
         <select onChange={filterRegion} value={region} name="regions" id="">
           {btns}
         </select>
       </nav>
-      <section>
-        {countries}
-      </section>
+      <section>{searchedData ? countries : searchedData}</section>
     </>
   );
 }
