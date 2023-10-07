@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 SearchBar.propTypes = {
   regionData: PropTypes.array.isRequired,
@@ -8,7 +9,7 @@ SearchBar.propTypes = {
   setInput: PropTypes.func.isRequired,
   input: PropTypes.string.isRequired,
   results: PropTypes.array.isRequired,
-  setRegion: PropTypes.func.isRequired,
+  setRegion: PropTypes.func.isRequired
 };
 
 
@@ -20,7 +21,7 @@ function SearchBar(props) {
     setRegion,
     setResults,
     region,
-    results,
+    results
   } = props;
   
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -65,13 +66,12 @@ function SearchBar(props) {
   }
 
   const filteredResults = results.map((result, index) => (
-    <p
+    <Link to={`/${result.cca3}`}
       key={index}
       className="search_result"
-      onClick={() => alert(`You selected: ${result.name.common}`)}
     >
       {result.name.common}
-    </p>
+    </Link>
   ));
 
   const [showResults, setShowResults] = useState(false);

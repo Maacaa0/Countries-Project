@@ -22,7 +22,7 @@ function fetchData(region, setRegionData, setResults) {
       console.error("Error fetching data:", error);
     });
 }
-
+// ADD FUNCTIONALITY TO SEARCH RESULTS
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [region, setRegion] = useState("all");

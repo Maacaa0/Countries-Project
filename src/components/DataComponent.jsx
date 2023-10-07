@@ -12,6 +12,7 @@ DataComponent.propTypes = {
   regionData: PropTypes.array.isRequired,
   setInput: PropTypes.func.isRequired,
   input: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired
 };
 
 function DataComponent({
@@ -21,7 +22,7 @@ function DataComponent({
   setResults,
   regionData,
   setInput,
-  input,
+  input
 }) {
   return (
     <section>
