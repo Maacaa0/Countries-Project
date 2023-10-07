@@ -1,6 +1,10 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types"
 import {moonIcon, sunIcon} from "../assets/icons"
 
+Header.propTypes = {
+  setDarkMode: PropTypes.func,
+  darkMode: PropTypes.bool
+}
 function Header(props) {
   return (
     <header>

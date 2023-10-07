@@ -11,3 +11,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+// https://chat.openai.com/share/ca8ccc40-72c2-4149-9629-ba35f81f4094

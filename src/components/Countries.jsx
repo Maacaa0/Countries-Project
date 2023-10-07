@@ -1,20 +1,42 @@
-/* eslint-disable react/prop-types */
-function Countries(props) {
+import PropTypes from "prop-types";
+
+Countries.propTypes = {
+  flag: PropTypes.string,
+  name: PropTypes.string,
+  region: PropTypes.string,
+  capital: PropTypes.array,
+  population: PropTypes.number,
+};
+
+function Countries({ flag, name, region, capital, population }) {
   return (
     <div className="country">
       <div className="image_container">
-        {props.flag && <img
+        <img
           className="country_flag"
-          src={props.flag}
-          alt={props.name + "flag"}
+          src={flag}
+          alt={name + "flag"}
           loading="lazy"
-        />}
+          onError={(e) => {
+            e.target.src = "./images/error-image.png";
+            console.log("Image was possibly blocked by your addblocker.");
+          }}
+        />
       </div>
       <div className="information_container">
-        <h2 className="country_name">{props.name}</h2>
-        <p className="country_population"><strong>Population: </strong>{props.population.toLocaleString()}</p>
-        <p className="country_region"><strong>Region: </strong>{props.region}</p>
-        <p className="country_capital"><strong>Capital: </strong>{props.capital}</p>
+        <h2 className="country_name">{name}</h2>
+        <p className="country_population">
+          <strong>Population: </strong>
+          {population.toLocaleString()}
+        </p>
+        <p className="country_region">
+          <strong>Region: </strong>
+          {region}
+        </p>
+        <p className="country_capital">
+          <strong>Capital: </strong>
+          {capital}
+        </p>
       </div>
     </div>
   );

@@ -32,6 +32,7 @@ header {
   box-shadow: 0px 3px 7px #00000063;
   padding: .5rem var(--pagePadding);
   width: 100%;
+  height: 4rem;
 }
 
 .darkmode {
@@ -145,6 +146,7 @@ section {
 .information_container {
   padding: 1rem;
   height: 50%;
+  border-top: 1px solid #ddd;
 }
 
 .search_container {
@@ -164,6 +166,7 @@ section {
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  z-index: 10;
 }
 
 .search_result {
@@ -182,3 +185,7 @@ section {
   cursor: pointer;
 }
 
+.capitalize {
+  display: inline;
+  text-transform: capitalize;
+}
