@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import SearchBar from "./SearchBar";
 
 // components
+import SearchBar from "./SearchBar";
 import Countries from "./Countries";
 
 DataComponent.propTypes = {
@@ -12,9 +12,8 @@ DataComponent.propTypes = {
   regionData: PropTypes.array.isRequired,
   setInput: PropTypes.func.isRequired,
   input: PropTypes.string.isRequired,
-  code: PropTypes.string.isRequired
+  code: PropTypes.string
 };
-
 function DataComponent({
   results,
   region,
@@ -24,6 +23,7 @@ function DataComponent({
   setInput,
   input
 }) {
+  
   return (
     <section>
       <SearchBar

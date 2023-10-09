@@ -29,10 +29,22 @@ function App() {
   const [regionData, setRegionData] = useState([]);
   const [results, setResults] = useState([]);
   const [input, setInput] = useState("");
+  const [allCountries, setAllCountries] = useState([]);
 
   useEffect(() => {
     fetchData(region, setRegionData, setResults);
   }, [region]);
+
+  useEffect(() => {
+    fetch(`https://restcountries.com/v3.1/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllCountries(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <main>
@@ -53,7 +65,7 @@ function App() {
             />
           }
         />
-        <Route path="/:code" element={<CountryDetail results={results} />} />
+        <Route path="/:code" element={<CountryDetail allCountries={allCountries} />} />
       </Routes>
     </main>
   );
