@@ -202,7 +202,7 @@ section {
   overflow-y: auto;
   background: var(--bg);
   margin-top: .5rem;
-  box-shadow: 0px 0px 8px #ddd;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.461);
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -215,7 +215,6 @@ section {
   padding: 10px 20px;
   text-decoration: none;
   display: block;
-  /* color: var(--text-clr); */
 }
 
 .search_result:visited {
@@ -223,7 +222,8 @@ section {
 }
 
 .search_result:hover {
-  background: #adadad;
+  color: var(--bg);
+  background: var(--text-clr);
   cursor: pointer;
 }
 
