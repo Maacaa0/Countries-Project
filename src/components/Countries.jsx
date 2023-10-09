@@ -26,7 +26,7 @@ function Countries({ flag, name, region, capital, population, code }) {
             }}
           />
         </div>
-        <div className="information_container">
+        <div className="information_container text">
           <h2 className="country_name">{name}</h2>
           <p className="country_population">
             <strong>Population: </strong>

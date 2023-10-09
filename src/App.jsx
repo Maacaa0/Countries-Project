@@ -46,6 +46,20 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    darkMode
+      ? document.documentElement.style.setProperty("--bg", "#212e37")
+      : document.documentElement.style.setProperty("--bg", "white");
+
+    darkMode
+      ? document.documentElement.style.setProperty("--element-clr", "#2b3743")
+      : document.documentElement.style.setProperty("--element-clr", "white");
+
+    darkMode
+      ? document.documentElement.style.setProperty("--text-clr", "white")
+      : document.documentElement.style.setProperty("--text-clr", "#212e37");
+  }, [darkMode]);
+
   return (
     <main>
       <Header setDarkMode={() => setDarkMode(!darkMode)} darkMode={darkMode} />

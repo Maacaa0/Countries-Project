@@ -30,7 +30,7 @@ function SearchBar(props) {
 
   // buttons for select tag
   const btns = allRegions.map((region) => (
-    <option key={region} value={region}>
+    <option className="text" key={region} value={region}>
       {region}
     </option>
   ));
@@ -100,11 +100,11 @@ function SearchBar(props) {
     <nav>
       <div className="search_container">
         {region !== "all" && (
-          <small className="searching">
+          <small className="searching text">
             searching in <p className="capitalize">{region}</p>
           </small>
         )}
-        <input
+        <input className="text"
           placeholder={"Search for a country..."}
           type="text"
           onChange={(e) => handleChange(e.target.value)}
@@ -112,12 +112,12 @@ function SearchBar(props) {
         />
 
         {showResults && (
-          <div className="results_container" ref={resultsContainer}>
+          <div className="results_container text" ref={resultsContainer}>
             {filteredResults}
           </div>
         )}
       </div>
-      <select onChange={filterRegion} value={region} name="regions">
+      <select  className="text" onChange={filterRegion} value={region} name="regions">
         {btns}
       </select>
     </nav>

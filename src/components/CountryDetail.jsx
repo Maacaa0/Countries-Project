@@ -39,7 +39,7 @@ function CountryDetail({ allCountries }) {
             />
           </div>
           <div className="detail_page_wrapper">
-            <div className="detail_page_info_container">
+            <div className="detail_page_info_container text">
               <h2 className="detail_page_title">{country.name.common}</h2>
               <div className="flex_container">
                 <div className="detail_page_info_left">
@@ -87,7 +87,7 @@ function CountryDetail({ allCountries }) {
                 </div>
               </div>
             </div>
-            <div className="bordering_countries">
+            <div className="bordering_countries text">
               <strong>Border Countries:</strong>
               {country.borders ? (
                 country.borders.map((borderingCountry) => (
