@@ -96,6 +96,8 @@ function SearchBar(props) {
     };
   }, []);
 
+  
+
   return (
     <nav>
       <div className="search_container">
@@ -106,7 +108,7 @@ function SearchBar(props) {
         )}
         <input className="text"
           placeholder={"Search for a country..."}
-          type="text"
+          type="search"
           onChange={(e) => handleChange(e.target.value)}
           value={input}
         />

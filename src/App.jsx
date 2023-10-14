@@ -7,7 +7,8 @@ import DataComponent from "./components/DataComponent";
 import Header from "./components/Header";
 import CountryDetail from "./components/CountryDetail";
 
-function fetchData(region, setRegionData, setResults) {
+function fetchData(region, setRegionData, setResults, setIsLoading) {
+  setIsLoading(true);
   fetch(
     region === "all"
       ? `https://restcountries.com/v3.1/${region}`
@@ -17,6 +18,7 @@ function fetchData(region, setRegionData, setResults) {
     .then((data) => {
       setRegionData(data);
       setResults(data);
+      setIsLoading(false);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -30,9 +32,10 @@ function App() {
   const [results, setResults] = useState([]);
   const [input, setInput] = useState("");
   const [allCountries, setAllCountries] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchData(region, setRegionData, setResults);
+    fetchData(region, setRegionData, setResults, setIsLoading);
   }, [region]);
 
   useEffect(() => {
@@ -76,10 +79,20 @@ function App() {
               regionData={regionData}
               setInput={setInput}
               input={input}
+              isLoading={isLoading}
             />
           }
         />
-        <Route path="/:code" element={<CountryDetail allCountries={allCountries} />} />
+        <Route
+          path="/:code"
+          element={
+            <CountryDetail
+              setIsLoading={setIsLoading}
+              isLoading={isLoading}
+              allCountries={allCountries}
+            />
+          }
+        />
       </Routes>
     </main>
   );
