@@ -34,6 +34,10 @@ h1 {
   color: var(--text-clr);
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   color: unset;

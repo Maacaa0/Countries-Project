@@ -96,8 +96,6 @@ function SearchBar(props) {
     };
   }, []);
 
-  
-
   return (
     <nav>
       <div className="search_container">
