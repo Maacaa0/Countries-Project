@@ -12,7 +12,7 @@ DataComponent.propTypes = {
   regionData: PropTypes.array.isRequired,
   setInput: PropTypes.func.isRequired,
   input: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool
+  code: PropTypes.string
 };
 function DataComponent({
   results,
@@ -21,7 +21,7 @@ function DataComponent({
   setResults,
   regionData,
   setInput,
-  input, isLoading
+  input
 }) {
   
   return (
@@ -35,7 +35,6 @@ function DataComponent({
         setInput={setInput}
         input={input}
       />
-      {isLoading && <div className="loading">loading...</div>}
       <div className="countries_container">
         {results.map((country, index) => (
           <Countries

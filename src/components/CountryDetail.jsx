@@ -6,22 +6,16 @@ import { arrowIcon } from "../assets/icons";
 
 CountryDetail.propTypes = {
   allCountries: PropTypes.array.isRequired,
-  setIsLoading: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
 };
 
-function CountryDetail({ allCountries, setIsLoading, isLoading }) {
+function CountryDetail({ allCountries }) {
   const [countryData, setCountryData] = useState([]);
   const params = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
     fetch(`https://restcountries.com/v3.1/alpha/${params.code}`)
       .then((res) => res.json())
-      .then((data) => setCountryData(data),
-      setIsLoading(false))
-      
-    
+      .then((data) => setCountryData(data));
   }, [params.code]);
 
   return (
@@ -31,95 +25,89 @@ function CountryDetail({ allCountries, setIsLoading, isLoading }) {
         {arrowIcon}Back
       </Link>
 
-      {isLoading ? (
-        <div className="loading">loading...</div>
-      ) : (
-        countryData.map((country) => (
-          <div className="flex_container" key={country.name.common}>
-            <div className="detail_page_image_container">
-              <img
-                className="detail_page_image"
-                src={country.flags.svg}
-                onError={(e) => {
-                  e.target.src = "./images/error-image.png";
-                  console.log("Image was possibly blocked by your addblocker.");
-                }}
-                alt={country.name.common + "flag"}
-              />
-            </div>
-            <div className="detail_page_wrapper">
-              <div className="detail_page_info_container text">
-                <h2 className="detail_page_title">{country.name.common}</h2>
-                <div className="flex_container">
-                  <div className="detail_page_info_left">
-                    <p className="detail_page_info">
-                      <strong>Native Name: </strong>
-                      {country.altSpellings[1]}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Population: </strong>
-                      {country.population.toLocaleString()}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Region: </strong>
-                      {country.region}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Sub Region: </strong>
-                      {country.subregion}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Capital: </strong>
-                      {country.capital}
-                    </p>
-                  </div>
-                  <div className="detail_page_info_right">
-                    <p className="detail_page_info">
-                      <strong>Top Level Domain: </strong>
-                      {country.tld}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Currencies: </strong>
-                      {country.currencies
-                        ? Object.keys(country.currencies)
-                            .map(
-                              (currencyCode) =>
-                                country.currencies[currencyCode].name
-                            )
-                            .join(", ")
-                        : ""}
-                    </p>
-                    <p className="detail_page_info">
-                      <strong>Languages: </strong>
-                      {Object.values(country.languages).join(", ")}
-                    </p>
-                  </div>
+      {countryData.map((country) => (
+        <div className="flex_container" key={country.name.common}>
+          <div className="detail_page_image_container">
+            <img
+              className="detail_page_image"
+              src={country.flags.svg}
+              onError={(e) => {
+                e.target.src = "./images/error-image.png";
+                console.log("Image was possibly blocked by your addblocker.");
+              }}
+              alt={country.name.common + "flag"}
+            />
+          </div>
+          <div className="detail_page_wrapper">
+            <div className="detail_page_info_container text">
+              <h2 className="detail_page_title">{country.name.common}</h2>
+              <div className="flex_container">
+                <div className="detail_page_info_left">
+                  <p className="detail_page_info">
+                    <strong>Native Name: </strong>
+                    {country.altSpellings[1]}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Population: </strong>
+                    {country.population.toLocaleString()}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Region: </strong>
+                    {country.region}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Sub Region: </strong>
+                    {country.subregion}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Capital: </strong>
+                    {country.capital}
+                  </p>
+                </div>
+                <div className="detail_page_info_right">
+                  <p className="detail_page_info">
+                    <strong>Top Level Domain: </strong>
+                    {country.tld}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Currencies: </strong>
+                    {country.currencies
+                      ? Object.keys(country.currencies)
+                          .map(
+                            (currencyCode) =>
+                              country.currencies[currencyCode].name
+                          )
+                          .join(", ")
+                      : ""}
+                  </p>
+                  <p className="detail_page_info">
+                    <strong>Languages: </strong>
+                    {Object.values(country.languages).join(", ")}
+                  </p>
                 </div>
               </div>
-              <div className="bordering_countries text">
-                <strong>Border Countries:</strong>
-                {country.borders ? (
-                  country.borders.map((borderingCountry) => (
-                    <Link
-                      className="bordering_country"
-                      key={borderingCountry}
-                      to={`/${borderingCountry}`}
-                    >
-                      {allCountries.map((result) =>
-                        result.cca3 === borderingCountry
-                          ? result.name.common
-                          : ""
-                      )}
-                    </Link>
-                  ))
-                ) : (
-                  <p className="border_none">None</p>
-                )}
-              </div>
+            </div>
+            <div className="bordering_countries text">
+              <strong>Border Countries:</strong>
+              {country.borders ? (
+                country.borders.map((borderingCountry) => (
+                  <Link
+                    className="bordering_country"
+                    key={borderingCountry}
+                    to={`/${borderingCountry}`}
+                  >
+                    {allCountries.map((result) =>
+                      result.cca3 === borderingCountry ? result.name.common : ""
+                    )}
+                  </Link>
+                ))
+              ) : (
+                <p className="border_none">None</p>
+              )}
             </div>
           </div>
-        ))
-      )}
+        </div>
+      ))}
     </div>
   );
 }

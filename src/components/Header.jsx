@@ -8,7 +8,7 @@ Header.propTypes = {
 function Header(props) {
   return (
     <header>
-      <h1 onClick={()=> window.location.href="/"} className="text pointer">Where in the world?</h1>
+      <h1 className="text">Where in the world?</h1>
       <button onClick={props.setDarkMode} className="darkmode text">
         {props.darkMode ? sunIcon : moonIcon}
         <p>Dark Mode</p>

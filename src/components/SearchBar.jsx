@@ -106,7 +106,7 @@ function SearchBar(props) {
         )}
         <input className="text"
           placeholder={"Search for a country..."}
-          type="search"
+          type="text"
           onChange={(e) => handleChange(e.target.value)}
           value={input}
         />
